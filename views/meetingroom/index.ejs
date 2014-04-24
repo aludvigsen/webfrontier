@@ -1,111 +1,21 @@
 <%- partial ('../topbar.ejs') %>
 <div id="chat" ng-app="meetingroom" ng-controller="meetingroomController">
-    <div class="nano">
-        <scrollable>
+
+    <scrollable>
 
         <ul class="content">
-            <li>
-                <div class="chatPicture"><a href="#" class="shadow"><img src="/img/profile_pictures/andreas.png" width="60px" height="60px"></a>
+            <li ng-repeat="message in messages">
+                <div class="chatPicture">
+                    <a href="#" class="shadow"><img ng-src="{{message.img}}" width="60px" height="60px"></a>
                 </div>
-                <div class="chatPost"><span class="chatName">Andreas Ludvigsen</span><span class="chatTimestamp"> -  Today at 11:20</span>
-                    <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.
-                        <br />
-                        <br />Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</p>
-                </div>
-            </li>
-            <li>
-                <div class="chatPicture"><a href="#" class="shadow"><img src="/img/profile_pictures/andreas.png" width="60px" height="60px"></a>
-                </div>
-                <div class="chatPost"><span class="chatName">Andreas Ludvigsen</span><span class="chatTimestamp"> -  Today at 11:20</span>
-                    <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.
-                        <br />
-                        <br />Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</p>
+                <div class="chatPost">
+                    <span class="chatName" ng-bind="message.user"></span><span class="chatTimestamp">{{message.timestamp | date:'medium'}}</span>
+                    <p ng-repeat="p in message.text" ng-bind="p"></p>
                 </div>
             </li>
-            <li>
-                <div class="chatPicture"><a href="#" class="shadow"><img src="/img/profile_pictures/andreas.png" width="60px" height="60px"></a>
-                </div>
-                <div class="chatPost"><span class="chatName">Andreas Ludvigsen</span><span class="chatTimestamp"> -  Today at 11:20</span>
-                    <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.
-                        <br />
-                        <br />Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</p>
-                </div>
-            </li>
-            <li>
-                <div class="chatPicture"><a href="#" class="shadow"><img src="/img/profile_pictures/andreas.png" width="60px" height="60px"></a>
-                </div>
-                <div class="chatPost"><span class="chatName">Andreas Ludvigsen</span><span class="chatTimestamp"> -  Today at 11:20</span>
-                    <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.
-                        <br />
-                        <br />Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</p>
-                </div>
-            </li>
-            <li>
-                <div class="chatPicture"><a href="#" class="shadow"><img src="/img/profile_pictures/andreas.png" width="60px" height="60px"></a>
-                </div>
-                <div class="chatPost"><span class="chatName">Andreas Ludvigsen</span><span class="chatTimestamp"> -  Today at 11:20</span>
-                    <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.
-                        <br />
-                        <br />Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</p>
-                </div>
-            </li>
-            <li>
-                <div class="chatPicture"><a href="#" class="shadow"><img src="/img/profile_pictures/andreas.png" width="60px" height="60px"></a>
-                </div>
-                <div class="chatPost"><span class="chatName">Andreas Ludvigsen</span><span class="chatTimestamp"> -  Today at 11:20</span>
-                    <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.
-                        <br />
-                        <br />Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</p>
-                </div>
-            </li>
-            <li>
-                <div class="chatPicture"><a href="#" class="shadow"><img src="/img/profile_pictures/andreas.png" width="60px" height="60px"></a>
-                </div>
-                <div class="chatPost"><span class="chatName">Andreas Ludvigsen</span><span class="chatTimestamp"> -  Today at 11:20</span>
-                    <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.
-                        <br />
-                        <br />Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</p>
-                </div>
-            </li>
-            <li>
-                <div class="chatPicture"><a href="#" class="shadow"><img src="/img/profile_pictures/andreas.png" width="60px" height="60px"></a>
-                </div>
-                <div class="chatPost"><span class="chatName">Andreas Ludvigsen</span><span class="chatTimestamp"> -  Today at 11:20</span>
-                    <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.
-                        <br />
-                        <br />Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</p>
-                </div>
-            </li>
-            <li>
-                <div class="chatPicture"><a href="#" class="shadow"><img src="/img/profile_pictures/andreas.png" width="60px" height="60px"></a>
-                </div>
-                <div class="chatPost"><span class="chatName">Andreas Ludvigsen</span><span class="chatTimestamp"> -  Today at 11:20</span>
-                    <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.
-                        <br />
-                        <br />Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</p>
-                </div>
-            </li>
-            <li>
-                <div class="chatPicture"><a href="#" class="shadow"><img src="/img/profile_pictures/andreas.png" width="60px" height="60px"></a>
-                </div>
-                <div class="chatPost"><span class="chatName">Andreas Ludvigsen</span><span class="chatTimestamp"> -  Today at 11:20</span>
-                    <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.
-                        <br />
-                        <br />Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</p>
-                </div>
-            </li>
-            <li>
-                <div class="chatPicture"><a href="#" class="shadow"><img src="/img/profile_pictures/andreas.png" width="60px" height="60px"></a>
-                </div>
-                <div class="chatPost"><span class="chatName">Andreas Ludvigsen</span><span class="chatTimestamp"> -  Today at 11:20</span>
-                    <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.
-                        <br />
-                        <br />Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</p>
-                </div>
-            </li>
+
         </ul>
-        </scrollable>
-    </div>
+    </scrollable>
     <div id="messageBoxContainer">
         <div class="chatPicture"><a href="#" class="shadow"><img src="/img/profile_pictures/andreas.png" width="60px" height="60px"></a>
         </div>
@@ -118,6 +28,6 @@
 
 <script src="/libs/jquery/jquery-2.0.3.min.js"></script>
 <script src="/libs/angular/angular.min.js"></script>
-<script src="/libs/nanoScroller/jquery.nanoscroller.min.js"></script>
+<script src="/libs/nanoScroller/jquery.nanoscroller.js"></script>
 <script src="/libs/nanoScroller/scrollable.js"></script>
 <script src="/modules/meetingroom/meetingroom.js"></script>
