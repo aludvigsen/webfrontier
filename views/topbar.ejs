@@ -1,0 +1,11 @@
+<div id="pageHeader">
+    <h1><%= pagename %></h1>
+    <div id="userinfo">
+        <% if(session.authenticated) { %>
+            <img src="/img/profile_pictures/andreas.png" width="24px" height="24px">
+            <span>Andreas Ludvigsen</span><i class="fa fa-caret-down"></i>
+        <% } else { %>
+            <span><a href="#">Logg inn</a></span>
+        <% } %>
+    </div>
+</div>
