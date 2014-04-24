@@ -8,7 +8,9 @@
 module.exports = {
 
     index: function(req, res, next) {
-        res.view();
+        res.view({
+            pagename: "Meeting room"
+        });
     }
 	
 };

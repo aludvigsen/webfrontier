@@ -25,7 +25,8 @@
     "sails-mongo": "^0.10.0-rc2",
     "bcryptjs": "^0.7.12",
     "moment": "^2.5.1",
-    "async": "^0.7.0"
+    "async": "^0.7.0",
+    "gravatar": "^1.0.6"
   },
   "scripts": {
     "start": "node app.js",
