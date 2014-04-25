@@ -1,8 +1,7 @@
 <%- partial ('../topbar.ejs') %>
 <div id="chat" ng-app="meetingroom" ng-controller="meetingroomController">
 
-    <scrollable>
-
+    <div id="myslimscroll">
         <ul class="content">
             <li ng-repeat="message in messages">
                 <div class="chatPicture">
@@ -15,12 +14,13 @@
             </li>
 
         </ul>
-    </scrollable>
+    </div>
+
     <div id="messageBoxContainer">
         <div class="chatPicture"><a href="#" class="shadow"><img src="/img/profile_pictures/andreas.png" width="60px" height="60px"></a>
         </div>
         <div id="messageBox">
-            <textarea id="message" rows="3" placeholder="Write your message..."></textarea>
+            <textarea id="message" rows="3" ng-enter="runThisMofo()" placeholder="Write your message..."></textarea>
         </div>
     </div>
 </div>
@@ -28,6 +28,7 @@
 
 <script src="/libs/jquery/jquery-2.0.3.min.js"></script>
 <script src="/libs/angular/angular.min.js"></script>
-<script src="/libs/nanoScroller/jquery.nanoscroller.js"></script>
-<script src="/libs/nanoScroller/scrollable.js"></script>
+<script src="/libs/jquery.slimscroll.js"></script>
+<!--<script src="/libs/nanoScroller/jquery.nanoscroller.js"></script>
+<script src="/libs/nanoScroller/scrollable.js"></script>-->
 <script src="/modules/meetingroom/meetingroom.js"></script>
