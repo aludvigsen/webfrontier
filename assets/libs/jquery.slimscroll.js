@@ -127,7 +127,7 @@
 
                         if ('scrollTo' in options) {
                             if(o.scrollTo === 'bottom') {
-                                offset = me.outerHeight();
+                                offset = me.find(":first-child").height();
                             } else {
                                 // jump to a static point
                                 offset = parseInt(o.scrollTo);
@@ -138,7 +138,7 @@
                             offset += parseInt(o.scrollBy);
                         }
                         else if ('destroy' in options) {
-                            console.log()
+                            console.log();
                             // remove slimscroll elements
                             bar.remove();
                             rail.remove();
@@ -375,6 +375,7 @@
 
                     // scroll content
                     if (o.animate){
+                        me.stop();
                         me.animate({ scrollTop: delta }, 1000);
                     }else{
                         me.scrollTop(delta);
