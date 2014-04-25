@@ -90,28 +90,19 @@ angular.module('meetingroom', [])
 
         };
 
-
-
-        $("#userinfo").click(function(){
-                scrollChatContainer.slimScroll({ scrollTo: 'bottom' });
-        });
-
-
         function initScroll() {
             var totalHeight = angular.element($window).height() - msgBoxContainer.outerHeight() - chatContainer.offset().top;
-            var width = scrollChatContainer.width();
             var o = {
                 start: 'bottom',
-                width: width + 'px',
                 height: totalHeight + 'px',
                 margin: 20,
-                animate: false
+                animate: false,
+                scrollTo: "bottom"
             };
             scrollChatContainer.slimscroll(o);
         }
 
         angular.element( $window ).resize(function() {
-            scrollChatContainer.slimscroll({destroy: true});
             initScroll();
         });
 

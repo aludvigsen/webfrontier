@@ -138,7 +138,6 @@
                             offset += parseInt(o.scrollBy);
                         }
                         else if ('destroy' in options) {
-                            console.log();
                             // remove slimscroll elements
                             bar.remove();
                             rail.remove();
