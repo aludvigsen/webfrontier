@@ -1,47 +1,52 @@
 angular.module('meetingroom', [])
-    .directive('ngEnter', function () {
-        return function (scope, element, attrs) {
-            element.bind("keydown keypress", function (event) {
-                if(event.which === 13  && !event.shiftKey) {
-                    scope.$apply(function (){
-                        scope.$eval(attrs.ngEnter);
-                    });
+    .directive('wfEnter', function () {
+        return {
+            scope: {
+                wfEnter: '&'
+            },
+            link: function (scope, element, attrs) {
+                element.bind("keydown keypress", function (event) {
+                    if(event.which === 13  && !event.shiftKey) {
+                        scope.$apply(function (){
+                            scope.wfEnter();
+                        });
 
-                    event.preventDefault();
-                }
-            });
+                        event.preventDefault();
+                    }
+                });
+            }
         };
     })
     .controller('meetingroomController', function($scope, $window, $timeout){
 
+
+        $scope.user = {
+            name: "Andreas Ludvigsen",
+            img: "http://placehold.it/60x60"
+        };
+
         $scope.messages = [{
-            user: "Andreas Ludvigsen",
-            img: "http://placehold.it/60x60",
+            user: $scope.user,
             timestamp: new Date(),
             text: ["This is a paragraph", "And this is another"]
         },{
-            user: "Andreas Ludvigsen",
-            img: "http://placehold.it/60x60",
+            user: $scope.user,
             timestamp: new Date(),
             text: ["This is a paragraph", "And this is another"]
         },{
-            user: "Andreas Ludvigsen",
-            img: "http://placehold.it/60x60",
+            user: $scope.user,
             timestamp: new Date(),
             text: ["This is a paragraph", "And this is another"]
         },{
-            user: "Andreas Ludvigsen",
-            img: "http://placehold.it/60x60",
+            user: $scope.user,
             timestamp: new Date(),
             text: ["This is a paragraph", "And this is another"]
         },{
-            user: "Andreas Ludvigsen",
-            img: "http://placehold.it/60x60",
+            user: $scope.user,
             timestamp: new Date(),
             text: ["This is a paragraph", "And this is another"]
         },{
-            user: "Andreas Ludvigsen",
-            img: "http://placehold.it/60x60",
+            user: $scope.user,
             timestamp: new Date(),
             text: ["Check out this link http://www.vg.no", "&nbsp;", "And this is another"]
         }
@@ -62,15 +67,30 @@ angular.module('meetingroom', [])
             text: ["This is a paragraph", "And this is another"]
         }*/];
 
-        $scope.runThisMofo = function () {
-            var a = $("textarea").val().replace(/\n/g, "<br>");
-            $("textarea").val("");
-            console.log(a);
-        };
-
         var msgBoxContainer = $("#messageBoxContainer");
         var chatContainer = $("#chat");
-        var scrollChatContainer = $("#myslimscroll");
+        var scrollChatContainer = $scope.scrollChatContainer = $("#myslimscroll");
+
+
+        $scope.sendMessage = function () {
+            if($scope.messageText === ""){
+                return;
+            }
+            var paragraphs = $scope.messageText.split("\n");
+            $scope.messages.push({
+                user: $scope.user,
+                timestamp: new Date(),
+                text: paragraphs
+            });
+            $scope.messageText = "";
+
+            $timeout(function (){
+                scrollChatContainer.slimScroll({scrollTo: "bottom"});
+            });
+
+        };
+
+
 
         $("#userinfo").click(function(){
                 scrollChatContainer.slimScroll({ scrollTo: 'bottom' });
