@@ -15,6 +15,9 @@
                 // total pane margin from top and bottom
                 margin : 20,
 
+                // use animate when scrolling
+                animate: true,
+
                 // width in pixels of the visible scroll area
                 width : 'auto',
 
@@ -97,8 +100,7 @@
                 var me = $(this);
 
                 // ensure we are not binding it again
-                if (me.parent().hasClass(o.wrapperClass))
-                {
+                if (me.parent().hasClass(o.wrapperClass)) {
                     // start from last bar position
                     var offset = me.scrollTop();
 
@@ -109,8 +111,7 @@
                     getBarHeight();
 
                     // check if we should scroll existing instance
-                    if ($.isPlainObject(options))
-                    {
+                    if ($.isPlainObject(options)) {
                         // Pass height: auto to an existing slimscroll object to force a resize after contents have changed
                         if ( 'height' in options && options.height == 'auto' ) {
                             me.parent().css('height', 'auto');
@@ -124,18 +125,20 @@
                             me.css('height', h);
                         }
 
-                        if ('scrollTo' in options)
-                        {
-                            // jump to a static point
-                            offset = parseInt(o.scrollTo);
+                        if ('scrollTo' in options) {
+                            if(o.scrollTo === 'bottom') {
+                                offset = me.outerHeight();
+                            } else {
+                                // jump to a static point
+                                offset = parseInt(o.scrollTo);
+                            }
                         }
-                        else if ('scrollBy' in options)
-                        {
+                        else if ('scrollBy' in options) {
                             // jump by value pixels
                             offset += parseInt(o.scrollBy);
                         }
-                        else if ('destroy' in options)
-                        {
+                        else if ('destroy' in options) {
+                            console.log()
                             // remove slimscroll elements
                             bar.remove();
                             rail.remove();
@@ -294,11 +297,9 @@
                 getBarHeight();
 
                 // check start position
-                if (o.start === 'bottom')
-                {
+                if (o.start === 'bottom') {
                     // scroll content to bottom
-                    bar.css({ top: getOuterHeight() - bar.outerHeight() });
-                    scrollContent(0, true);
+                    scrollToBottom();
                 }
                 else if (o.start !== 'top')
                 {
@@ -312,8 +313,13 @@
                 // attach scroll events
                 attachWheel();
 
-                function _onWheel(e)
-                {
+                // Custom scroll to bottom
+                function scrollToBottom() {
+                    bar.css({ top: getOuterHeight() - bar.outerHeight() });
+                    scrollContent(0, true);
+                }
+
+                function _onWheel(e) {
                     // use mouse wheel only when mouse is over
                     if (!isOverPanel) { return; }
 
@@ -334,14 +340,12 @@
                     if (!releaseScroll) { e.returnValue = false; }
                 }
 
-                function scrollContent(y, isWheel, isJump)
-                {
+                function scrollContent(y, isWheel, isJump) {
                     releaseScroll = false;
                     var delta = y;
                     var maxTop = getOuterHeight() - bar.outerHeight();
 
-                    if (isWheel)
-                    {
+                    if (isWheel) {
                         // move bar with mouse wheel
                         delta = parseInt(bar.css('top')) + y * parseInt(o.wheelStep) / 100 * bar.outerHeight();
 
@@ -362,8 +366,7 @@
                     percentScroll = parseInt(bar.css('top')) / (getOuterHeight() - bar.outerHeight());
                     delta = percentScroll * (me[0].scrollHeight - getOuterHeight());
 
-                    if (isJump)
-                    {
+                    if (isJump) {
                         delta = y;
                         var offsetTop = delta / me[0].scrollHeight * getOuterHeight();
                         offsetTop = Math.min(Math.max(offsetTop, 0), maxTop);
@@ -371,7 +374,11 @@
                     }
 
                     // scroll content
-                    me.scrollTop(delta);
+                    if (o.animate){
+                        me.animate({ scrollTop: delta }, 1000);
+                    }else{
+                        me.scrollTop(delta);
+                    }
 
                     // fire scrolling event
                     me.trigger('slimscrolling', ~~delta);
@@ -383,15 +390,12 @@
                     hideBar();
                 }
 
-                function attachWheel()
-                {
-                    if (window.addEventListener)
-                    {
+                function attachWheel() {
+                    if (window.addEventListener) {
                         this.addEventListener('DOMMouseScroll', _onWheel, false );
                         this.addEventListener('mousewheel', _onWheel, false );
                     }
-                    else
-                    {
+                    else {
                         document.attachEvent("onmousewheel", _onWheel)
                     }
                 }

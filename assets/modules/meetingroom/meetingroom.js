@@ -72,23 +72,26 @@ angular.module('meetingroom', [])
         var chatContainer = $("#chat");
         var scrollChatContainer = $("#myslimscroll");
 
+        $("#userinfo").click(function(){
+                scrollChatContainer.slimScroll({ scrollTo: 'bottom' });
+        });
+
 
         function initScroll() {
-            var topbar = chatContainer.offset().top;
-            var msgBox = msgBoxContainer.outerHeight();
-            var windowSize = angular.element($window).height();
-            var totalHeight = windowSize - msgBox - topbar;
+            var totalHeight = angular.element($window).height() - msgBoxContainer.outerHeight() - chatContainer.offset().top;
             var width = scrollChatContainer.width();
-            scrollChatContainer.slimscroll({
+            var o = {
+                start: 'bottom',
                 width: width + 'px',
                 height: totalHeight + 'px',
-                //railVisible: true,
                 margin: 20,
-                start: 'bottom'
-            });
+                animate: false
+            };
+            scrollChatContainer.slimscroll(o);
         }
 
         angular.element( $window ).resize(function() {
+            scrollChatContainer.slimscroll({destroy: true});
             initScroll();
         });
 
