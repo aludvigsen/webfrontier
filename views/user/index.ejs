@@ -1,34 +1,32 @@
-<h3>User Administration</h3>
+<%- partial ('../topbar.ejs') %>
 
-<table class='table'>
-	<tr>
-		<th style="max-width: 200px;">Navn</th>
-		<th>Epost</th>
-		<th style="max-width: 50px;"></th>
-		<th style="max-width: 70px;"></th>
-		<th style="max-width: 100px;"></th>
-		<th style="max-width: 100px;"></th>
-	</tr>
-	
+<div id="userpage">
+    <h3>User Administration</h3>
 
-	<% _.each(users, function(user) { %>
-	<tr data-id="<%= user.id %>" data-model="user">
-		<td><%= user.name %></td>
-		<td><%= user.email %></td>
-		<% if (user.admin) { %>
-			<td> <img src="/images/user/admin.png" style="margin-top: 3px;"></td>
-		<% } else { %>
-			<td> <img src="/images/user/pawn.png" style="margin-top: 3px;"></td>
-		<% } %>	
-		<td><a href="/user/show/<%= user.id %>" class="btn btn-sm btn-primary">Vis</a></td>
-		<td><a href="/user/edit/<%= user.id %>" class="btn btn-sm btn-warning">Rediger</a></td>
+    <table class='table'>
+        <tr data-id="<%= user.id %>" data-model="user">
+            <td>Navn</td>
+            <td><%= user.name %></td>
+        </tr>
 
-		<td><form action="/user/destroy/<%= user.id %>" method="POST">
-			<input type="hidden" name="_method" value="delete"/>
-			<input type="submit" class="btn btn-sm btn-danger" value="Slett"/>
-			<input type="hidden" name="_csrf" value="<%= _csrf %>" />
-		</form></td>
-	</tr> 
+        <tr>
+            <td>Epost</td>
+            <td><%= user.email %></td>
+        </tr>
 
-	<% }) %>
-</table>
+        <% if (user.admin) { %>
+        <tr>
+            <td> <img src="/images/user/admin.png" style="margin-top: 3px;"></td>
+        </tr>
+        <% } %>
+    </table>
+
+    <a href="/user/show/<%= user.id %>" class="btn btn-sm btn-primary">Vis</a>
+    <a href="/user/edit/<%= user.id %>" class="btn btn-sm btn-warning">Rediger</a>
+
+    <form action="/user/destroy/<%= user.id %>" method="POST">
+        <input type="hidden" name="_method" value="delete"/>
+        <input type="submit" class="btn btn-sm btn-danger" value="Slett"/>
+        <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+    </form>
+</div>

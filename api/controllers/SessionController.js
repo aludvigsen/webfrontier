@@ -75,7 +75,7 @@ module.exports = {
 				user.save(function(err, user) {
 					if (err) return next(err);
 
-					res.redirect('/');
+					res.redirect('/user');
 				});
 			});
 		});

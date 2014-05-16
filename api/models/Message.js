@@ -9,6 +9,14 @@ module.exports = {
 
 	attributes: {
 
+        message: {
+            type: 'array',
+            required: true
+        },
+
+        user: {
+            model: 'User'
+        }
 
 	}
 

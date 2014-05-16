@@ -49,24 +49,14 @@ module.exports = {
         });
     },
 
-    // render the profile view (e.g. /views/show.ejs)
-    show: function(req, res, next) {
-        User.findOne(req.param('id'), function foundUser(err, user) {
+    index: function(req, res, next) {
+        // Get the logged in user
+        User.findOne(req.session.User.id, function foundUser(err, user) {
             if (err) return next(err);
             if (!user) return next();
             res.view({
+                pagename: "My settings",
                 user: user
-            });
-        });
-    },
-
-    index: function(req, res, next) {
-        // Get an array of all users in the User collection(e.g. table)
-        User.find(function foundUsers(err, users) {
-            if (err) return next(err);
-            // pass the array down to the /views/index.ejs page
-            res.view({
-                users: users
             });
         });
     },
