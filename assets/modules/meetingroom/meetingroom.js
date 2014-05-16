@@ -25,47 +25,7 @@ angular.module('meetingroom', [])
             img: "http://placehold.it/60x60"
         };
 
-        $scope.messages = [{
-            user: $scope.user,
-            timestamp: new Date(),
-            text: ["This is a paragraph", "And this is another"]
-        },{
-            user: $scope.user,
-            timestamp: new Date(),
-            text: ["This is a paragraph", "And this is another"]
-        },{
-            user: $scope.user,
-            timestamp: new Date(),
-            text: ["This is a paragraph", "And this is another"]
-        },{
-            user: $scope.user,
-            timestamp: new Date(),
-            text: ["This is a paragraph", "And this is another"]
-        },{
-            user: $scope.user,
-            timestamp: new Date(),
-            text: ["This is a paragraph", "And this is another"]
-        },{
-            user: $scope.user,
-            timestamp: new Date(),
-            text: ["Check out this link http://www.vg.no", "&nbsp;", "And this is another"]
-        }
-        /*,{
-            user: "Andreas Ludvigsen",
-            img: "http://placehold.it/60x60",
-            timestamp: new Date(),
-            text: ["This is a paragraph", "And this is another"]
-        },{
-            user: "Andreas Ludvigsen",
-            img: "http://placehold.it/60x60",
-            timestamp: new Date(),
-            text: ["This is a paragraph", "And this is another"]
-        },{
-            user: "Andreas Ludvigsen",
-            img: "http://placehold.it/60x60",
-            timestamp: new Date(),
-            text: ["This is a paragraph", "And this is another"]
-        }*/];
+        $scope.messages = [];
 
         var msgBoxContainer = $("#messageBoxContainer");
         var chatContainer = $("#chat");
