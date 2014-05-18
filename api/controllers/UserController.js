@@ -44,7 +44,7 @@ module.exports = {
                 // After successfully creating the user
                 // redirect to the show action
                 //res.redirect('/user/show/' + user.id);
-                res.redirect('/');
+                return res.redirect('/');
             });
         });
     },
@@ -54,7 +54,7 @@ module.exports = {
         User.findOne(req.session.User.id, function foundUser(err, user) {
             if (err) return next(err);
             if (!user) return next();
-            res.view({
+            return res.view({
                 pagename: "My settings",
                 user: user
             });
@@ -68,7 +68,7 @@ module.exports = {
             if (err) return next(err);
             if (!user) return next('User doesn\'t exist.');
 
-            res.view({
+            return res.view({
                 user: user
             });
         });
@@ -95,7 +95,7 @@ module.exports = {
                 return res.redirect('/user/edit/' + req.param('id'));
             }
 
-            res.redirect('/user/show/' + req.param('id'));
+            return res.redirect('/user/show/' + req.param('id'));
         });
     },
 
@@ -109,7 +109,7 @@ module.exports = {
             User.destroy(req.param('id'), function userDestroyed(err) {
                 if (err) return next(err);
             });
-            res.redirect('/user');
+            return res.redirect('/user');
         });
     }
 
