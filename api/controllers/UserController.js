@@ -8,7 +8,9 @@
 module.exports = {
 
     'new': function(req, res) {
-        res.view();
+        res.view({
+            pagename: "Create an account"
+        });
     },
 
     create: function(req, res, next) {
@@ -77,25 +79,40 @@ module.exports = {
     // process the info from edit view
     update: function(req, res, next) {
 
-        if (req.session.User.admin) {
-            var userObj = {
-                name: req.param('name'),
-                email: req.param('email'),
-                admin: req.param('admin')
-            }
-        } else {
-            var userObj = {
-                name: req.param('name'),
-                email: req.param('email')
-            }
-        }
+        User.findOne(req.session.User.id).done(function(err, user) {
 
-        User.update(req.param('id'), userObj, function userUpdated(err) {
-            if (err) {
-                return res.redirect('/user/edit/' + req.param('id'));
+            if(req.param('name')) {
+                user.name = req.param('name');
+            }
+            if(req.param('email')) {
+                user.email = req.param('email');
             }
 
-            return res.redirect('/user/show/' + req.param('id'));
+            // Gravatar
+            if(req.param('sameAsLogin') !== '') {
+                user.settings.gravatar.sameAsLogin = req.param('sameAsLogin');
+                user.settings.gravatar.email = req.session.User.email;
+            }
+            if(req.param('gravatarEmail')) {
+                user.settings.gravatar.email = req.param('gravatarEmail');
+            }
+
+            // Navision
+            if(req.param('navisionUsername')) {
+                user.settings.navision.username = req.param('navisionUsername');
+            }
+            if(req.param('navisionPassword')) {
+                user.settings.navision.password = req.param('navisionPassword');
+            }
+
+            user.save(function(err) {
+                if (err) {
+                    //tODO: Do some error handling
+                    return res.redirect('/user');
+                }
+                return res.redirect('/user');
+            });
+
         });
     },
 

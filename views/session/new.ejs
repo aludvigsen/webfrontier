@@ -1,31 +1,28 @@
-<div class="panel panel-default col-lg-offset-4 col-lg-4 no-padding" style="margin-bottom: 100px;">
-    <div class="panel-heading">
-        <h3 class="panel-title">Logg inn</h3>
-    </div>
-    <div class="panel-body">
+<%- partial ('../topbar.ejs') %>
+<div id="log-in-page">
+    <% if(flash && flash.err) { %>
+    <p><strong>Info!</strong> <%= flash.err[0].message %></p>
+    <% } %>
 
-        <% if(flash && flash.err) { %>
-        <div class="alert alert-warning" style="padding: 10px;">
-            <p><strong>Info!</strong> <%= flash.err[0].message %></p>
-        </div>
-        <% } %>
+    <form action="/session/create" method="POST">
+        <table cellpadding="4">
+            <tr>
+                <td>Email</td>
+                <td>
+                    <input type="text" name="email">
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>
+                    <input type="password" name="password">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Logg inn"></td>
+            </tr>
+        </table>
+    </form>
 
-        <form action="/session/create" method="POST" class="form-horizontal" role="form">
-            <div class="form-group">
-                <label for="emailInput" class="col-sm-4 control-label">Email</label>
-                <div class="col-sm-8">
-                    <input id="emailInput" type="text" class="form-control" placeholder="Email address" name="email">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputPassword" class="col-sm-4 control-label">Password</label>
-                <div class="col-sm-8">
-                    <input id="inputPassword" type="password" class="form-control" placeholder="Password" name="password">
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary pull-right" style="margin-top:10px; margin-right: 0px;">Logg inn</button>
-        </form>
-
-
-    </div>
 </div>

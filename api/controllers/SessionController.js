@@ -5,12 +5,15 @@
  * @description	:: Contains logic for handling requests.
  */
 
-var bcrypt = require('bcryptjs');
+var Bcrypt = require('bcryptjs'),
+    Gravatar = require('gravatar');
 
 module.exports = {
 
 	'new': function(req, res) {
-		res.view('session/new');
+		res.view({
+            pagename: "Sign in"
+        });
 	},
 
 	create: function(req, res, next) {
@@ -52,7 +55,7 @@ module.exports = {
 			}
 
 			// Compare password from the form params to the encrypted password of the user found.
-			bcrypt.compare(req.param('password'), user.encryptedPassword, function(err, valid) {
+			Bcrypt.compare(req.param('password'), user.encryptedPassword, function(err, valid) {
 				if (err) return next(err);
 
 				// If the password from the form doesn't match the password from the database...
@@ -71,6 +74,9 @@ module.exports = {
 				// Log user in
 				req.session.authenticated = true;
 				req.session.User = user;
+
+                // Set gravatar image
+                req.session.User.gravatar = Gravatar.url(user.email, {s: 60});
 
 				user.save(function(err, user) {
 					if (err) return next(err);

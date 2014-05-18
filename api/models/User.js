@@ -58,6 +58,17 @@ module.exports = {
 
     beforeCreate: function (values, next) {
 
+        values.settings = {
+            gravatar: {
+                sameAsLogin: true,
+                email: values.email
+            },
+            navision: {
+                username: "",
+                password: ""
+            }
+        };
+
         // This checks to make sure the password and password confirmation match before creating record
         if (!values.password || values.password != values.confirmation) {
             return next({err: ["Password doesn't match password confirmation."]});

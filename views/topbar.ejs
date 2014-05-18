@@ -1,11 +1,31 @@
-<div id="pageHeader">
+<div id="topbar">
     <h1><%= pagename %></h1>
-    <div id="userinfo">
-        <% if(session.authenticated) { %>
-            <img src="/img/profile_pictures/andreas.png" width="24px" height="24px">
-            <span>Andreas Ludvigsen</span><i class="fa fa-caret-down"></i>
-        <% } else { %>
-            <span><a href="#">Logg inn</a></span>
-        <% } %>
+
+    <% if(session.authenticated) { %>
+    <div class="Dropdown">
+        <div class="Dropdown-profile">
+            <img src="<%= session.User.gravatar %>" />
+            <span class="Name"><%= session.User.name %></span>
+            <span class="MenuIcon">
+              <span class="MenuIcon-line"></span>
+              <span class="MenuIcon-line"></span>
+              <span class="MenuIcon-line"></span>
+            </span>
+        </div>
+        <nav class="Dropdown-nav">
+            <ul class="Dropdown-group">
+                <li>
+                    <a href="/user" class="NavLink"><i class="fa fa-cog fa-fw"></i> Settings</a>
+                </li>
+            </ul>
+            <ul class="Dropdown-group">
+                <li>
+                    <a href="/session/destroy" class="NavLink"><i class="fa fa-sign-out fa-fw"></i> Log out</a>
+                </li>
+            </ul>
+        </nav>
     </div>
+    <% } else { %>
+    <span style="float: right; padding: 13px;"><a href="/session/new">Logg inn</a></span>
+    <% } %>
 </div>

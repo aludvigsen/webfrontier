@@ -28,7 +28,9 @@
     "async": "^0.7.0",
     "gravatar": "^1.0.6",
     "request": "2.33.0",
-    "cheerio": "0.16.0"
+    "cheerio": "0.16.0",
+    "node-bourbon": "^1.2.3",
+    "grunt-sass": "^0.12.1"
   },
   "scripts": {
     "start": "node app.js",

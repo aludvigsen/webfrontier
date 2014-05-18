@@ -5,7 +5,7 @@
 
     <table class='table' cellpadding="4">
         <tr data-id="<%= user.id %>" data-model="user">
-            <td style="width:80px;">Navn</td>
+            <td style="width:120px;">Navn</td>
             <td><%= user.name %></td>
         </tr>
 
@@ -22,7 +22,6 @@
         <tr>
             <td>Rediger</td>
             <td>
-                <a href="/user/show/<%= user.id %>">Vis</a>
                 <a href="/user/edit/<%= user.id %>">Rediger</a>
                 <form action="/user/destroy/<%= user.id %>" method="POST" style="display: inline;">
                     <input type="submit" value="Slett"/>
@@ -31,31 +30,47 @@
         </tr>
     </table>
 
-    <h4>Gravatar</h4>
+    <h4>Gravatar (barely implemented)</h4>
 
-    <table cellpadding="4">
-        <tr>
-            <td style="width:80px;">Same as login</td>
-            <td><input type="checkbox" checked> (<%= user.email %>)</td>
-        </tr>
-        <tr>
-            <td style="width:80px;">Epost</td>
-            <td><input type="text" disabled></td>
-        </tr>
-    </table>
+    <img src="<%= session.User.gravatar %>" />
 
-    <h4>Navision settings</h4>
+    <form action="/user/update/<%= user.id %>?gravatar" method="POST">
+        <table cellpadding="4">
+            <tr>
+                <td style="width:120px;">Same as login</td>
+                <td><input type="checkbox" name="sameAsLogin" checked> <i style="font-size: 14px;"><%= user.email %></i></td>
+            </tr>
+            <tr>
+                <td style="width:120px;">Epost</td>
+                <td><input type="text" name="gravatarEmail" value="<%= user.settings.gravatar.email %>" disabled style="width: 200px;"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Update"></td>
+            </tr>
+        </table>
+    </form>
 
-    <table cellpadding="4">
-        <tr>
-            <td style="width:80px;">Brukernavn</td>
-            <td><input type="text"></td>
-        </tr>
-        <tr>
-            <td>Passord</td>
-            <td><input type="password"></td>
-        </tr>
-    </table>
+    <h4>Navision settings (not implemented)</h4>
+
+    <p style="color: red;"><i class="fa fa-bomb" style="font-size: 1.6em; color: black;"></i> Warning! Password currently stored in plain text</p>
+
+    <form action="/user/update/<%= user.id %>?navision" method="POST">
+        <table cellpadding="4">
+            <tr>
+                <td style="width:120px;">Brukernavn</td>
+                <td><input type="text" name="navisionUsername" value="<%= user.settings.navision.username %>" style="width: 200px;"></td>
+            </tr>
+            <tr>
+                <td>Passord</td>
+                <td><input type="password" name="navisionPassword" value="<%= user.settings.navision.password %>" style="width: 200px;"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Update"></td>
+            </tr>
+        </table>
+    </form>
 
 
 </div>
