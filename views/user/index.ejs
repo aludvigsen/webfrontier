@@ -1,11 +1,11 @@
 <%- partial ('../topbar.ejs') %>
 
 <div id="userpage">
-    <h3>User Administration</h3>
+    <h4>Profile</h4>
 
-    <table class='table'>
+    <table class='table' cellpadding="4">
         <tr data-id="<%= user.id %>" data-model="user">
-            <td>Navn</td>
+            <td style="width:80px;">Navn</td>
             <td><%= user.name %></td>
         </tr>
 
@@ -19,14 +19,43 @@
             <td> <img src="/images/user/admin.png" style="margin-top: 3px;"></td>
         </tr>
         <% } %>
+        <tr>
+            <td>Rediger</td>
+            <td>
+                <a href="/user/show/<%= user.id %>">Vis</a>
+                <a href="/user/edit/<%= user.id %>">Rediger</a>
+                <form action="/user/destroy/<%= user.id %>" method="POST" style="display: inline;">
+                    <input type="submit" value="Slett"/>
+                </form>
+            </td>
+        </tr>
     </table>
 
-    <a href="/user/show/<%= user.id %>" class="btn btn-sm btn-primary">Vis</a>
-    <a href="/user/edit/<%= user.id %>" class="btn btn-sm btn-warning">Rediger</a>
+    <h4>Gravatar</h4>
 
-    <form action="/user/destroy/<%= user.id %>" method="POST">
-        <input type="hidden" name="_method" value="delete"/>
-        <input type="submit" class="btn btn-sm btn-danger" value="Slett"/>
-        <input type="hidden" name="_csrf" value="<%= _csrf %>" />
-    </form>
+    <table cellpadding="4">
+        <tr>
+            <td style="width:80px;">Same as login</td>
+            <td><input type="checkbox" checked> (<%= user.email %>)</td>
+        </tr>
+        <tr>
+            <td style="width:80px;">Epost</td>
+            <td><input type="text" disabled></td>
+        </tr>
+    </table>
+
+    <h4>Navision settings</h4>
+
+    <table cellpadding="4">
+        <tr>
+            <td style="width:80px;">Brukernavn</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>Passord</td>
+            <td><input type="password"></td>
+        </tr>
+    </table>
+
+
 </div>
