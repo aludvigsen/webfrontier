@@ -32,13 +32,17 @@
 
     <h4>Gravatar (barely implemented)</h4>
 
-    <img src="<%= session.User.gravatar %>" />
+    <img src="<%= session.User.gravatar %>" width="30" style="display: inline; vertical-align: middle;" />
+
+    <p style="display: inline; color: red;">Only main email works with gravatar right now.</p>
+
+    <br><br>
 
     <form action="/user/update/<%= user.id %>?gravatar" method="POST">
         <table cellpadding="4">
             <tr>
                 <td style="width:120px;">Same as login</td>
-                <td><input type="checkbox" name="sameAsLogin" checked> <i style="font-size: 14px;"><%= user.email %></i></td>
+                <td><input type="checkbox" name="sameAsLogin" checked disabled> <i style="font-size: 14px;"><%= user.email %></i></td>
             </tr>
             <tr>
                 <td style="width:120px;">Epost</td>
